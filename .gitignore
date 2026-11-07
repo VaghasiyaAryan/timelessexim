@@ -1,0 +1,13 @@
+node_modules/
+dist/
+vercel-out/
+.vercel
+
+# Local database
+data/*.db
+data/*.db-*
+
+# Secrets (keep the example file)
+.env
+.env*
+!.env.example

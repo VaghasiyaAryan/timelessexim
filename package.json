@@ -1,0 +1,34 @@
+{
+  "name": "timeless-exim",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Timeless Exim — premium home textile export website with admin panel",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "dev:client": "vite",
+    "dev:server": "node --watch-path=server server/index.js",
+    "build": "vite build",
+    "build:vercel": "node scripts/build-vercel.js",
+    "start": "node server/index.js",
+    "seed": "node --env-file-if-exists=.env server/seed.js --reset-products"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@vercel/analytics": "^2.0.1",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "d3-geo": "^3.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "topojson-client": "^3.1.0",
+    "vite": "^6.0.7",
+    "world-atlas": "^2.0.2"
+  }
+}
