@@ -1,18 +1,21 @@
+import '../styles/admin.css';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AuthProvider, useAuth } from './lib/auth-context.jsx';
-import { ToastProvider } from './lib/toast-context.jsx';
+import { AuthProvider, useAuth } from '../lib/auth-context.jsx';
+import { ToastProvider } from '../lib/toast-context.jsx';
 
-import AdminLayout from './admin/AdminLayout.jsx';
-import Login from './admin/pages/Login.jsx';
-import Dashboard from './admin/pages/Dashboard.jsx';
-import Products from './admin/pages/Products.jsx';
-import ProductForm from './admin/pages/ProductForm.jsx';
-import Categories from './admin/pages/Categories.jsx';
-import Enquiries from './admin/pages/Enquiries.jsx';
-import EnquiryDetail from './admin/pages/EnquiryDetail.jsx';
-import Settings from './admin/pages/Settings.jsx';
-import Team from './admin/pages/Team.jsx';
-import { can, firstAllowedPath } from './lib/permissions.js';
+import AdminLayout from './AdminLayout.jsx';
+import Login from './pages/Login.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Products from './pages/Products.jsx';
+import ProductForm from './pages/ProductForm.jsx';
+import Categories from './pages/Categories.jsx';
+import Enquiries from './pages/Enquiries.jsx';
+import EnquiryDetail from './pages/EnquiryDetail.jsx';
+import Settings from './pages/Settings.jsx';
+import Team from './pages/Team.jsx';
+import { can, firstAllowedPath } from '../lib/permissions.js';
+
+document.title = 'Admin — Timeless Exim';
 
 function RequireAuth({ children }) {
   const { user } = useAuth();
@@ -52,7 +55,7 @@ function NoAccess() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/admin">
+    <BrowserRouter basename="/admin" future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AuthProvider>
         <ToastProvider>
           <Routes>

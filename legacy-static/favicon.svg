@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Timeless Exim monogram: ink disc, cream "T", gold "E". Drawn as shapes so it never depends on a font. -->
-  <circle cx="32" cy="32" r="32" fill="#171717"/>
-  <circle cx="32" cy="32" r="27.5" fill="none" stroke="#B59A6A" stroke-width="1.5"/>
-  <path fill="#F7F5F0" d="M13 19h18v4.5h-6.75V45h-4.5V23.5H13z"/>
-  <path fill="#B59A6A" d="M34 19h17v4.5H38.5v6.25h10.5v4.5H38.5v6.25H51V45H34z"/>
-</svg>

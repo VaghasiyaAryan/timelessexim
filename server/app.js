@@ -50,24 +50,19 @@ app.use('/api/team', teamRouter);
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
 
-// Admin SPA (built via `npm run build`, output to dist/ with base "/admin/")
-const adminDist = path.join(root, 'dist');
-if (fs.existsSync(path.join(adminDist, 'index.html'))) {
-  app.use('/admin', express.static(adminDist));
-  app.get('/admin/*', (req, res) => res.sendFile(path.join(adminDist, 'index.html')));
-} else {
-  app.get(['/admin', '/admin/*'], (req, res) => {
-    res.type('text/plain').send(
-      'Admin panel is not built yet.\n\n' +
-        'During development, run `npm run dev` and open http://localhost:5173/admin/\n' +
-        'For production, run `npm run build` first, then restart this server.'
-    );
-  });
-}
-
-// Public site (legacy-static)
-app.use(express.static(path.join(root, 'legacy-static'), { extensions: ['html'] }));
-app.use((req, res) => res.status(404).sendFile(path.join(root, 'legacy-static', '404.html')));
+// React app: public website + admin panel (built via `npm run build` into dist/)
+const dist = path.join(root, 'dist');
+const indexHtml = path.join(dist, 'index.html');
+app.use(express.static(dist, { index: false }));
+app.use('/assets', (req, res) => res.status(404).end()); // missing build files shouldn't return the page
+app.get('*', (req, res) => {
+  if (fs.existsSync(indexHtml)) return res.sendFile(indexHtml);
+  res.type('text/plain').send(
+    'The website is not built yet.\n\n' +
+      'During development, run `npm run dev` and open http://localhost:5173/\n' +
+      'For production, run `npm run build` first, then restart this server.'
+  );
+});
 
 app.use((err, req, res, next) => {
   console.error(err);
@@ -81,6 +76,7 @@ export function start() {
   app.listen(port, () => {
     console.log(`Timeless Exim server running on http://localhost:${port}`);
     console.log(`  Public site:  http://localhost:${port}/`);
-    console.log(`  Admin panel:  http://localhost:${port}/admin/ (after \`npm run build\`)`);
+    console.log(`  Admin panel:  http://localhost:${port}/admin/`);
+    console.log('  (serves the built app from dist/; run `npm run build` first, or use `npm run dev` on port 5173)');
   });
 }

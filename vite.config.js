@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const apiPort = env.PORT || 5175;
 
   return {
-    base: '/admin/',
+    base: '/',
     plugins: [react()],
     server: {
       port: 5173,
